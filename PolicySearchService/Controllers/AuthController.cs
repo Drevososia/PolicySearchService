@@ -20,16 +20,16 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public ActionResult<AuthResponse> Login(AuthRequest request)
     {
-        _logger.LogInformation("Login attempt for user: {Login}, org: {OrgCode}", request.Login, request.OrgCode);
+        _logger.LogInformation("Попытка логина для пользователя: {Login}, Код организации: {OrgCode}", request.Login, request.OrgCode);
 
         var result = _authService.Authenticate(request);
         if (result is null)
         {
-            _logger.LogWarning("Failed login for user: {Login}", request.Login);
+            _logger.LogWarning("Ошибка входа для пользователя: {Login}", request.Login);
             return Unauthorized(new { message = "Invalid credentials" });
         }
 
-        _logger.LogInformation("Successful login for user: {Login}", request.Login);
+        _logger.LogInformation("Успешная попытка логина для пользователя: {Login}", request.Login);
         return Ok(result);
     }
 }

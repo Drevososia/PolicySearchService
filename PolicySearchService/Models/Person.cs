@@ -8,7 +8,7 @@ public class Person
     public int? W { get; set; }
     public DateTime? DR { get; set; }
     public DateTime? DS { get; set; }
-    public string? Q { get; set; }
+    public string? SMO { get; set; }
     public string? SPOL { get; set; }
     public string? NPOL { get; set; }
     public string? ENP { get; set; }

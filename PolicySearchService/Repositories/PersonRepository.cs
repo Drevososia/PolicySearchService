@@ -17,7 +17,7 @@ public class PersonRepository : IPersonRepository
     {
         using var connection = _context.CreateConnection();
         return await connection.QueryFirstOrDefaultAsync<Person>(
-            "SELECT FAM, IM, OT, W, DR, DS, Q, SPOL, NPOL, ENP, OPDOC, ID FROM PEOPLE WHERE ENP = @Enp",
+            "SELECT FAM, IM, OT, W, DR, DS, Q as SMO, SPOL, NPOL, ENP, OPDOC, ID FROM PEOPLE WHERE ENP = @Enp",
             new { Enp = enp });
     }
 }

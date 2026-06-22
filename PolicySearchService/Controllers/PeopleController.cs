@@ -22,13 +22,13 @@ public class PeopleController : ControllerBase
     [HttpGet("policy/{enp}")]
     public async Task<ActionResult<PolicySearchResponse>> GetByPolicy(string enp)
     {
-        _logger.LogInformation("Searching person by ENP: {Enp}", enp);
+        _logger.LogInformation("Поиск ЗЛ по енп: {Enp}", enp);
 
         var person = await _repository.GetByEnpAsync(enp);
         if (person is null)
         {
-            _logger.LogWarning("Person with ENP {Enp} not found", enp);
-            return NotFound(new { message = "Person not found" });
+            _logger.LogWarning("ЗЛ с ЕНП {Enp} не найден", enp);
+            return NotFound(new { message = "ЗЛ не найден" });
         }
 
         var response = new PolicySearchResponse
@@ -39,14 +39,14 @@ public class PeopleController : ControllerBase
             W = person.W,
             DR = person.DR,
             DS = person.DS,
-            Q = person.Q,
+            SMO = person.SMO,
             SPOL = person.SPOL,
             NPOL = person.NPOL,
             ENP = person.ENP,
             OPDOC = person.OPDOC
         };
 
-        _logger.LogInformation("Found person: {Fam} {Im} {Ot}, ENP: {Enp}", person.FAM, person.IM, person.OT, enp);
+        _logger.LogInformation("Найден ЗЛ: {Fam} {Im} {Ot}, ЕНП: {Enp}", person.FAM, person.IM, person.OT, enp);
         return Ok(response);
     }   
 }

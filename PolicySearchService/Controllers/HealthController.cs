@@ -25,12 +25,12 @@ public class HealthController : ControllerBase
             using var connection = _context.CreateConnection();
             await connection.ExecuteAsync("SELECT 1");
 
-            _logger.LogInformation("Health check: DB connection OK");
+            _logger.LogInformation("Проверка подключения к БД: Успешно!");
             return Ok(new { status = "healthy", database = "connected" });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Health check: DB connection FAILED");
+            _logger.LogError(ex, "Проверка подключения к БД: Подключение не установлено!");
             return StatusCode(500, new { status = "unhealthy", database = "disconnected", error = ex.Message });
         }
     }
