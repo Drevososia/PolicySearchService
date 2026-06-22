@@ -7,17 +7,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, ConfigurationManager configuration)
     {
-        var mainConnection = configuration.GetConnectionString("DefaultConnection")
+        var connection = configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-        var archiveConnection = configuration.GetConnectionString("ArchiveConnection")
-            ?? throw new InvalidOperationException("Connection string 'ArchiveConnection' not found.");
 
-        services.AddSingleton(new SrzDbContext(mainConnection));
-        services.AddSingleton(new AttachedPersonDbContext(archiveConnection));
+        services.AddSingleton(new SrzDbContext(connection));
 
-        services.AddSingleton<IPersonRepository>(sp =>
-            new PersonRepository(sp.GetRequiredService<AttachedPersonDbContext>()));
-        
         services.AddSingleton<IPersonRepository>(sp =>
             new PersonRepository(sp.GetRequiredService<SrzDbContext>()));
 
