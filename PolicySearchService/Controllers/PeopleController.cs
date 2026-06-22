@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PolicySearchService.Models;
-using PolicySearchService.Repositories;
+using PolicySearchService.Services;
 
 namespace PolicySearchService.Controllers;
 
@@ -9,12 +9,12 @@ namespace PolicySearchService.Controllers;
 [Route("api/[controller]")]
 public class PeopleController : ControllerBase
 {
-    private readonly IPersonRepository _repository;
+    private readonly IPersonSearchService _searchService;
     private readonly ILogger<PeopleController> _logger;
 
-    public PeopleController(IPersonRepository repository, ILogger<PeopleController> logger)
+    public PeopleController(IPersonSearchService searchService, ILogger<PeopleController> logger)
     {
-        _repository = repository;
+        _searchService = searchService;
         _logger = logger;
     }
 
@@ -24,10 +24,10 @@ public class PeopleController : ControllerBase
     {
         _logger.LogInformation("Поиск ЗЛ по енп: {Enp}", enp);
 
-        var person = await _repository.GetByEnpAsync(enp);
+        var person = await _searchService.SearchByEnpAsync(enp);
         if (person is null)
         {
-            _logger.LogWarning("ЗЛ с ЕНП {Enp} не найден", enp);
+            _logger.LogWarning("ЗЛ с ЕНП {Enp} не найден ни в одном источнике", enp);
             return NotFound(new { message = "ЗЛ не найден" });
         }
 

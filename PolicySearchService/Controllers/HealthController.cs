@@ -8,10 +8,10 @@ namespace PolicySearchService.Controllers;
 [Route("api/[controller]")]
 public class HealthController : ControllerBase
 {
-    private readonly DapperDbContext _context;
+    private readonly SrzDbContext _context;
     private readonly ILogger<HealthController> _logger;
 
-    public HealthController(DapperDbContext context, ILogger<HealthController> logger)
+    public HealthController(SrzDbContext context, ILogger<HealthController> logger)
     {
         _context = context;
         _logger = logger;

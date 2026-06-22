@@ -3,11 +3,11 @@ using Microsoft.Data.SqlClient;
 
 namespace PolicySearchService.Data;
 
-public class DapperDbContext
+public abstract class DapperDbContext
 {
     private readonly string _connectionString;
 
-    public DapperDbContext(string connectionString)
+    protected DapperDbContext(string connectionString)
     {
         _connectionString = connectionString;
     }

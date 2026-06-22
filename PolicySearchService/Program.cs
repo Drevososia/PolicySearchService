@@ -2,8 +2,6 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
-using PolicySearchService.Data;
-using PolicySearchService.Repositories;
 using PolicySearchService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,11 +48,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddAuthorization();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddSingleton(new DapperDbContext(connectionString));
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
-builder.Services.AddSingleton<IAuthService, AuthService>();
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
