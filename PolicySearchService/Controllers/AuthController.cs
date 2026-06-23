@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using PolicySearchService.Models;
-using PolicySearchService.Services;
+using PolicySearchService.Models.Authorization;
+using PolicySearchService.Services.AuthService;
 
 namespace PolicySearchService.Controllers;
 

@@ -1,6 +1,6 @@
-namespace PolicySearchService.Models;
+namespace PolicySearchService.Models.Authorization;
 
-public class AuthRequest
+public class AuthSettings
 {
     public string Login { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;

@@ -1,8 +1,8 @@
 using Dapper;
 using PolicySearchService.Data;
-using PolicySearchService.Models;
+using PolicySearchService.Models.Person;
 
-namespace PolicySearchService.Repositories;
+namespace PolicySearchService.Repositories.PersonRepository;
 
 public class PersonRepository : IPersonRepository
 {

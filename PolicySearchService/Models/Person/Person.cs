@@ -1,6 +1,6 @@
-namespace PolicySearchService.Models;
+namespace PolicySearchService.Models.Person;
 
-public class PolicySearchResponse
+public class Person
 {
     public string? FAM { get; set; }
     public string? IM { get; set; }
@@ -13,4 +13,5 @@ public class PolicySearchResponse
     public string? NPOL { get; set; }
     public string? ENP { get; set; }
     public int? OPDOC { get; set; }
+    public int Id { get; set; }
 }

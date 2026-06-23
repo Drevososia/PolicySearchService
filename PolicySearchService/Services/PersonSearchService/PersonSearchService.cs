@@ -1,7 +1,7 @@
-using PolicySearchService.Models;
-using PolicySearchService.Repositories;
+using PolicySearchService.Models.Person;
+using PolicySearchService.Repositories.PersonRepository;
 
-namespace PolicySearchService.Services;
+namespace PolicySearchService.Services.PersonSearchService;
 
 public class PersonSearchService : IPersonSearchService
 {
@@ -16,9 +16,6 @@ public class PersonSearchService : IPersonSearchService
 
     public async Task<Person?> SearchByEnpAsync(string enp)
     {
-        var person = await _repository.GetByEnpAsync(enp);
-        if (person is null)
-            _logger.LogWarning("ЗЛ с ЕНП {Enp} не найден", enp);
-        return person;
+        return await _repository.GetByEnpAsync(enp);
     }
 }

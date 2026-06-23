@@ -1,4 +1,4 @@
-namespace PolicySearchService.Models;
+namespace PolicySearchService.Models.Authorization;
 
 public class AuthResponse
 {

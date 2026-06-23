@@ -3,9 +3,9 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using PolicySearchService.Models;
+using PolicySearchService.Models.Authorization;
 
-namespace PolicySearchService.Services;
+namespace PolicySearchService.Services.AuthService;
 
 public class AuthService : IAuthService
 {
@@ -44,19 +44,4 @@ public class AuthService : IAuthService
 
         return new AuthResponse { Token = new JwtSecurityTokenHandler().WriteToken(token) };
     }
-}
-
-public class JwtSettings
-{
-    public string Key { get; set; } = string.Empty;
-    public string Issuer { get; set; } = string.Empty;
-    public string Audience { get; set; } = string.Empty;
-    public int ExpireMinutes { get; set; } = 60;
-}
-
-public class AuthSettings
-{
-    public string Login { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
-    public string OrgCode { get; set; } = string.Empty;
 }
