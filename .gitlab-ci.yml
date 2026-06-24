@@ -1,0 +1,29 @@
+stages:
+  - build
+
+default:
+  tags: [windows]
+
+variables:
+  NUGET_PACKAGES_DIRECTORY: ".nuget"
+
+cache:
+  key: '${CI_JOB_STAGE}-${CI_COMMIT_REF_SLUG}'
+  paths:
+    - '*/obj/project.assets.json'
+    - '*/obj/*.csproj.nuget.*'
+    - '${NUGET_PACKAGES_DIRECTORY}'
+
+build-win64:
+  stage: build
+  before_script:
+    - dotnet restore PolicySearchService/PolicySearchService.csproj --arch x64 --packages ${NUGET_PACKAGES_DIRECTORY}
+  script:
+    - dotnet publish PolicySearchService/PolicySearchService.csproj -c Release -r win-x64 -f net8.0 --nologo --no-restore /nr:false -o policySearch/
+  artifacts:
+    name: "policySearch-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}"
+    paths:
+      - policySearch/*
+    exclude:
+      - policySearch/appsettings.*
+    expire_in: 1 w
