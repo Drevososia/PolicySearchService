@@ -5,10 +5,14 @@ using Microsoft.OpenApi;
 using PolicySearchService.Models;
 using PolicySearchService.Models.Authorization;
 using PolicySearchService.Services;
+using Serilog;
 
 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, config) =>
+    config.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
